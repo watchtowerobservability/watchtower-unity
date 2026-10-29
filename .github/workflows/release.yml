@@ -18,7 +18,7 @@ jobs:
           dotnet-version: '8.0.x'
       - run: dotnet test ci/Core.Tests.csproj
       # UPM packages are consumed from git; the tarball is what we attest and attach.
-      - run: tar --exclude=.git --exclude=.github --exclude=ci -czf watchtower-unity-${GITHUB_REF_NAME}.tgz .
+      - run: tar --exclude=.git --exclude=.github --exclude=ci -czf "$RUNNER_TEMP/watchtower-unity-${GITHUB_REF_NAME}.tgz" . && mv "$RUNNER_TEMP"/watchtower-unity-*.tgz .
       - uses: actions/attest-build-provenance@v2
         with:
           subject-path: 'watchtower-unity-*.tgz'
