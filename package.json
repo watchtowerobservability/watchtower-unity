@@ -1,0 +1,10 @@
+{
+  "name": "com.watchtowerobservability.watchtower",
+  "displayName": "Watchtower",
+  "version": "0.1.0",
+  "unity": "2021.3",
+  "description": "Watchtower for Unity: exceptions and logs over OTLP/HTTP, offline buffer, IL2CPP symbol upload.",
+  "license": "Apache-2.0",
+  "keywords": ["observability", "errors", "logs", "opentelemetry"],
+  "samples": [{ "displayName": "Minimal", "description": "Init and capture.", "path": "Samples~/Minimal" }]
+}

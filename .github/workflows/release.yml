@@ -1,0 +1,28 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet test ci/Core.Tests.csproj
+      # UPM packages are consumed from git; the tarball is what we attest and attach.
+      - run: tar --exclude=.git --exclude=.github --exclude=ci -czf watchtower-unity-${GITHUB_REF_NAME}.tgz .
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: 'watchtower-unity-*.tgz'
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" watchtower-unity-*.tgz --generate-notes --verify-tag

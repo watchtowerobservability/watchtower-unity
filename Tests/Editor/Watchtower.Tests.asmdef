@@ -1,0 +1,8 @@
+{
+  "name": "Watchtower.Tests",
+  "references": ["Watchtower.Runtime", "Watchtower.Editor"],
+  "includePlatforms": ["Editor"],
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"]
+}
