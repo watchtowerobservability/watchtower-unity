@@ -25,6 +25,12 @@ namespace Watchtower
         /// <summary>Capture Debug.Log at Info level too (default: warnings and above).</summary>
         public bool CaptureInfo = false;
         public int MaxBuffered = 500;
+        /// <summary>The app's bundle id / package name, sent as X-Watchtower-App-Id (an app sends no Origin, so the publishable key must list it). Default: Application.identifier.</summary>
+        public string AppId = System.Environment.GetEnvironmentVariable("WT_APP_ID") ?? "";
+        /// <summary>Send scene views, the cold launch time, slow and frozen frames and hangs to /v1/rum/events.</summary>
+        public bool TrackRum = true;
+        /// <summary>A frame that takes this many seconds counts as a hang (app_hang vital).</summary>
+        public double HangSeconds = 5;
         /// <summary>Return null to drop the record; edit it to redact. Runs after the default redaction.</summary>
         public Func<LogRecord, LogRecord> BeforeSend;
 

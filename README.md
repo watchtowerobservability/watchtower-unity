@@ -27,9 +27,11 @@ Use a publishable key in the game, never a secret ingest key (Init refuses `wti_
 | --- | --- |
 | Unhandled exceptions, `Debug.LogException` | type, message, stack trace |
 | `Debug.LogError/LogWarning/LogAssertion` | warnings and above; `CaptureInfo` adds `Debug.Log` |
+| RUM (`TrackRum`, on by default) | scene views, `app_launch_cold` (engine start to first frame), `slow_frames` / `frozen_frames` per scene, `app_hang` (a frame of `HangSeconds`, default 5, or more); sent to `/v1/rum/events`; kept on disk (newest 200) across a quit and sent next launch; a watchdog thread reports a hang that never ends |
+| App id | `AppId` (default `Application.identifier`) is sent as `X-Watchtower-App-Id`; add it to the publishable key's app ids |
 | Trace link | `SetTraceContext(traceparent)` stamps trace and span ids on following records |
 | Offline buffer | bounded in memory, spilled to disk on quit, sent next launch |
-| IL2CPP / native symbols | post-build upload of `.so`, `.dSYM`, `.pdb`, `.sym` |
+| IL2CPP / native symbols | post-build upload of `.so`, `.dSYM`, `.pdb`, `.sym`, and `LineNumberMappings.json` (C++ frames then show their C# file and line) |
 
 ## Symbol upload
 

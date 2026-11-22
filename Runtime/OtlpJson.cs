@@ -7,7 +7,7 @@ namespace Watchtower
     /// <summary>OTLP/HTTP JSON logs encoder. No UnityEngine dependency so it is unit-testable anywhere.</summary>
     public static class OtlpJson
     {
-        public const string SdkVersion = "0.1.0";
+        public const string SdkVersion = "0.1.1";
 
         public static string Esc(string s)
         {

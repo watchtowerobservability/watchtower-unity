@@ -14,6 +14,8 @@ namespace Watchtower
         /// <summary>Maps a file to an artifact kind, or null when we do not upload it.</summary>
         public static string KindFor(string path)
         {
+            // IL2CPP's C++ to C# line map; the server applies it to frames of the same release
+            if (Path.GetFileName(path) == "LineNumberMappings.json") return "il2cpp";
             switch (Path.GetExtension(path).ToLowerInvariant())
             {
                 case ".so": return "elf";
